@@ -1,4 +1,5 @@
 export const ADD_TODO = 'ADD_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const UPDATE_TODOS = 'UPDATE_TODOS';
 export const DELETE_TODO = 'DELETE_TODO';
-export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 export const SELECT_FILTER = 'SELECT_FILTER'; 

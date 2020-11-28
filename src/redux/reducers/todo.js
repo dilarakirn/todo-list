@@ -1,15 +1,17 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  todos: [
-    { label: 'todo1', completed: false },
-    { label: 'todo2', completed: false },
-    { label: 'todo3', completed: false },
-  ],
+  todos: [],
 };
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+      case actionTypes.UPDATE_TODOS: {
+        return {
+          ...state,
+          todos: action.payload,
+        };
+      }
       case actionTypes.ADD_TODO: {
         const todoItem = {label: action.payload, completed: false };
         return {
@@ -19,21 +21,17 @@ const reducer = (state = initialState, action) => {
       }
       case actionTypes.DELETE_TODO: {
         let copyTodos = [...state.todos];
-        const itemIndex = copyTodos.findIndex(todo => todo.label === action.payload);
+        const itemIndex = copyTodos.findIndex(todo => todo._id === action.payload);
         copyTodos.splice(itemIndex, 1);
         return {
           ...state,
           todos: copyTodos
         };
       }
-      case actionTypes.TOGGLE_COMPLETE: {
+      case actionTypes.UPDATE_TODO: {
         let copyTodos = [...state.todos];
-        const itemIndex = copyTodos.findIndex(todo => todo.label === action.payload);
-        copyTodos[itemIndex] = {
-          ...copyTodos[itemIndex],
-          completed: !copyTodos[itemIndex].completed,
-        };
-
+        const itemIndex = copyTodos.findIndex(todo => todo._id === action.payload._id);
+        copyTodos[itemIndex] = action.payload;
         return {
           ...state,
           todos: copyTodos,
