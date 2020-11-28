@@ -1,0 +1,19 @@
+.AddTodo {
+  justify-content: center;
+  align-items: center;
+}
+.AddTodo .AddButton {
+  background-color: rgb(104, 74, 240);
+  color: white;
+  padding: 3px 5px;
+}
+
+.AddTodo .AddButton:hover, .AddTodo .AddButton:active {
+  background-color: #727cda;
+  color: white;
+}
+
+.AddTodo Input {
+  margin: 5px;
+  width: 40%;
+}

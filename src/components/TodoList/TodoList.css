@@ -1,0 +1,17 @@
+.TodoItemLabel {
+    font-size: 2vw; /* 10vw will set the size to 10% of the viewport width */
+}
+.TodoItemCompleted {
+    text-decoration: line-through;
+    font-size: 2vw;
+}
+.DeleteTodoButton {
+    background-color: brown;
+    padding: 5px;
+}
+.TodoItem {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
