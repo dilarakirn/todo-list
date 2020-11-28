@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'; // connect - high order component'i return eden bir func.
 import * as actionCreators from '../../redux/actions/index';
+import axios from '../../utils/axios';
+import constants from '../../resources/constants';
 import './AddTodo.css';
 
 const AddTodo = (props) => {
@@ -10,9 +12,20 @@ const AddTodo = (props) => {
     setValue(value);
   }
 
-  const addTodo = (todo) => {
-    setValue('');
-    props.onAddTodo(value);
+  const addTodo = async () => {
+    try {
+      const todoItem = {
+        label: value,
+        completed: false,
+      };
+      const response = await axios.post(constants.API_POST_TODO, todoItem);
+      if (response.data) {
+        setValue('');
+        props.onAddTodo(value);
+      }
+    } catch (err) {
+      console.log('addTodoApi err', err);
+    }
   }
 
   return(
