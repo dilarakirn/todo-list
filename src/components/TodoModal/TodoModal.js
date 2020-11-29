@@ -99,6 +99,7 @@ const TodoModal = (props) => {
                       type="radio"
                       label={<div className="ColorLabel" style={{backgroundColor: labelItem.color}}/>}
                       name="formRadioGroup"
+                      id={labelItem.key}
                       key={labelItem.key}
                       onChange={() => { setTodoLabelColor(labelItem.color) }}
                     />
