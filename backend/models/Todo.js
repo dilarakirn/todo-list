@@ -11,7 +11,7 @@ let todoSchema = new Schema({
   deadline: {
     type: String
   },
-  label: {
+  labelColor: {
     type: String
   },
   completed: {

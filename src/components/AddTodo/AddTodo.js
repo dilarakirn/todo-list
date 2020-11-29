@@ -19,6 +19,7 @@ const AddTodo = (props) => {
         description: todo.description,
         deadline: todo.deadline,
         completed: false,
+        labelColor: todo.labelColor,
       };
       const response = await axios.post(constants.API_POST_TODO, todoItem);
       if (response.data) {

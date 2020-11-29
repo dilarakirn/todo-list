@@ -45,6 +45,7 @@ const TodoList = (props) => {
           ...props.filteredTodos[todoItemIndex],
           description: todo.description,
           deadline: todo.deadline,
+          labelColor: todo.labelColor,
         };
       }
       const response = await axios.put(`${constants.API_UPDATE_TODO}${updatedTodo._id}`, updatedTodo);
@@ -102,13 +103,20 @@ const TodoList = (props) => {
           </Form.Group>
         </td>
         <td>
-          <Button className="Button" size="sm" variant="success" onClick={() => { todoItemEditPress(todo._id); }}>
+          <Form.Group controlId={todo.labelColor} className="FormGroup">
+            <Form.Label>
+              <div className="ColorLabel" style={{backgroundColor: todo.labelColor}}/>
+            </Form.Label>
+          </Form.Group>
+        </td>
+        <td>
+          <Button className="EditDeleteButton" size="sm" variant="success" onClick={() => { todoItemEditPress(todo._id); }}>
           <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
             <FiEdit2/>
           </IconContext.Provider>
            
           </Button>
-          <Button className="Button" size="sm" variant="danger" onClick={() => { deleteTodoApi(todo._id)}}>
+          <Button className="EditDeleteButton" size="sm" variant="danger" onClick={() => { deleteTodoApi(todo._id)}}>
             <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
              <FiTrash2/>
             </IconContext.Provider>
@@ -121,16 +129,17 @@ const TodoList = (props) => {
   };
 
   return(
-    <div>
-      <Table hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Description</th>
-          <th>Deadline of Task</th>
-          <th></th>
-        </tr>
-      </thead>
+    <div className="TodoListContainer">
+      <Table hover className="TodoListTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Description</th>
+            <th>Deadline of Task</th>
+            <th>Label Color of Task</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
         {(props.filteredTodos && props.filteredTodos.length) ? props.filteredTodos.map((todo, index) => {
           return todoItem(todo, index)
