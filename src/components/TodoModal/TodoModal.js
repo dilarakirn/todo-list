@@ -12,7 +12,11 @@ const TodoModal = (props) => {
 
   useEffect(() => {
     setModalShow(props.modalShow);
-  }, [props.modalShow]);
+    if (props.todo?.description && props.todo?.deadline) {
+      setTodoDescription(props.todo.description);
+      setTodoDeadline(props.todo.deadline);
+    }
+  }, [props.modalShow, props.todo]);
 
   const onClose = () => {
     setModalShow(false);
@@ -23,6 +27,7 @@ const TodoModal = (props) => {
     if (todoDescription) {
       setModalShow(false);
       const todoItem = {
+        ...props.todo,
         description: todoDescription,
         deadline: todoDeadline,
       };
@@ -76,14 +81,7 @@ const TodoModal = (props) => {
                 onChange={(e) => { setTodoDeadline(e.target.value); }}
                 />
             </Form.Group>
-              <div className="ButtonContainer">
-                <div>
-                <Button className="Button" onClick={onClose}>Close</Button>
-                </div>
-                <div>
-                <Button className="Button" variant="success" onClick={saveOnPress} type="submit">Save</Button>
-                </div>
-              </div>
+              <Button className="Button" variant="success" onClick={saveOnPress}>Save</Button> 
           </Form>
         </Modal.Body>
         <Modal.Footer>

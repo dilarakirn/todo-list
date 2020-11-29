@@ -15,7 +15,7 @@ import constants from '../../resources/constants';
 
 const TodoList = (props) => {
   const [modalShow, setModalShow] = useState(false);
-  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [selectedTodoItem, setSelectedTodoItem] = useState(null);
 
   const deleteTodoApi = async (id) => {
     // delete from db then update redux
@@ -40,10 +40,11 @@ const TodoList = (props) => {
           completed: !props.filteredTodos[todoItemIndex].completed,
         };
       } else {
-        const todoItemIndex = props.filteredTodos.findIndex(todoItem => todoItem._id === selectedTodo);
+        const todoItemIndex = props.filteredTodos.findIndex(todoItem => todoItem._id === selectedTodoItem._id);
         updatedTodo = {
           ...props.filteredTodos[todoItemIndex],
-          todo
+          description: todo.description,
+          deadline: todo.deadline,
         };
       }
       const response = await axios.put(`${constants.API_UPDATE_TODO}${updatedTodo._id}`, updatedTodo);
@@ -56,18 +57,22 @@ const TodoList = (props) => {
   };
 
   const todoItemEditPress = (id) => {
-    setSelectedTodo(id);
+    const todoItemIndex = props.filteredTodos.findIndex(todoItem => todoItem._id === id);
+    if (todoItemIndex !== -1) {
+      const todoItem = props.filteredTodos[todoItemIndex];
+      setSelectedTodoItem(todoItem);
+    }
     setModalShow(true);
   };
 
   const todoItemCheckPress = (id) => {
-    setSelectedTodo(id);
     updateTodoApi(id, 'updateStatus');
   }
 
   const renderModal = (props) => {
     return (
       <Modal
+        todo={selectedTodoItem}
         modalShow={modalShow}
         onClose={() => { setModalShow(false); }}
         saveOnPress={(todo) => { updateTodoApi(todo, 'updateTodo'); }} />
