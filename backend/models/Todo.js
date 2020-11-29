@@ -5,6 +5,9 @@ let todoSchema = new Schema({
   id: {
     type: String
   },
+  description: {
+    type: String
+  },
   label: {
     type: String
   },
