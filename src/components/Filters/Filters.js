@@ -6,15 +6,22 @@ import './Filters.css';
 
 const Filters = (props) => {
   const filterItem = ({key, label}) => {
-    return <button
+    return (
+      <div className="FilterContainer">
+        <button
             key={key}
             className="FilterButton"
             onClick={() => {props.onSelectFilter(key)}}>
-            {label}</button>
+          {label}
+        </button>
+        <div className="Divider" />
+      </div>
+    );
+   
   }
 
   return(
-    <div>
+    <div className="FilterDiv">
       {props.filters && props.filters.length ? props.filters.map((filter) => {
         return filterItem(filter)
       }) : null}

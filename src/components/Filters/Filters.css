@@ -2,5 +2,28 @@
     background:none;
     border:none;
     outline:none;
-    font-size: 2vw;
+    font-size: 1.5vw;
+    padding: 5px;
+    margin: 5px;
+   
+}
+.FilterButton:focus {
+    border:none;
+    outline:none;
+}
+.FilterDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.FilterContainer {
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.Divider {
+    background-color: slategray;
+    height: 1px;
+    
 }
