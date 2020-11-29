@@ -1,0 +1,10 @@
+.Button {
+    margin: 5px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.ButtonContainer {
+   display: flex;
+   flex-direction: row;
+}
