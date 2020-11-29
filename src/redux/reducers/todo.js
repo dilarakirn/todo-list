@@ -13,10 +13,9 @@ const reducer = (state = initialState, action) => {
         };
       }
       case actionTypes.ADD_TODO: {
-        const todoItem = {label: action.payload, completed: false };
         return {
           ...state,
-          todos: state.todos.concat(todoItem)
+          todos: state.todos.concat(action.payload)
         };
       }
       case actionTypes.DELETE_TODO: {
