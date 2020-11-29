@@ -1,5 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'; // connect - high order component'i return eden bir func.
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { IconContext } from 'react-icons';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
+
 import './TodoList.css';              
 import * as actionCreators from '../../redux/actions/index';
 import getFilteredTodos from '../../redux/selectors/selector';
@@ -41,23 +47,40 @@ const TodoList = (props) => {
  
   const todoItem = (todo, index) => {
     return (
-      <div className="TodoItem" key={`${index}${todo.label}`}>
-        <p
-          className={todo.completed ? 'TodoItemCompleted' : 'TodoItemLabel'}
-          onClick={() => { updateTodoApi(todo._id)}}>
-          {todo.label}</p>
-        <button
-          className="DeleteTodoButton"
-          onClick={() => { deleteTodoApi(todo._id)}}>Delete</button>
-      </div>
-      )
+      <tr key={todo._id}>
+        <td>
+          <Form.Group controlId={todo._id} className="FormGroup">
+            <Form.Check type="checkbox" label={todo.description} checked={todo.completed} onChange={() => { updateTodoApi(todo._id)}}/>
+          </Form.Group>
+        </td>
+        <td>
+          <Button className="Button" size="sm" variant="success" onClick={() => { updateTodoApi(todo._id)}}>
+          <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
+            <FiEdit2/>
+          </IconContext.Provider>
+           
+          </Button>
+          <Button className="Button" size="sm" variant="danger" onClick={() => { deleteTodoApi(todo._id)}}>
+            <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
+             <FiTrash2/>
+            </IconContext.Provider>
+          </Button>
+        </td>
+        <td>
+        </td>
+      </tr>
+    );
   };
 
   return(
-    <div className="TodoList">
-      {props.filteredTodos && props.filteredTodos.length ? props.filteredTodos.map((todo, index) => {
-        return todoItem(todo, index)
-      }) : <p className="TodoItem">There is no item</p>}
+    <div className="table-wrapper">
+      <Table hover>
+        <tbody>
+        {(props.filteredTodos && props.filteredTodos.length) ? props.filteredTodos.map((todo, index) => {
+          return todoItem(todo, index)
+        }) : null}
+        </tbody>
+      </Table>
     </div>
   );
 }
