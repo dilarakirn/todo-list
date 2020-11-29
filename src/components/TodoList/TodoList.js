@@ -85,6 +85,29 @@ const TodoList = (props) => {
     const splittedDate = date.split("-");
     return `${splittedDate[2]}.${splittedDate[1]}.${splittedDate[0]}`
   }
+
+  const remainDayToTask = (taskDeadline) => {
+    let convertedDeadline = '';
+    if (taskDeadline ) {
+      const splittedDate = taskDeadline.split("-");
+      convertedDeadline = `${splittedDate[1]}/${splittedDate[2]}/${splittedDate[0]}`
+    }
+
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+
+    const date1 = new Date(convertedDeadline);
+    const date2 = new Date(today);
+    const diffTime = (date1 - date2);
+
+    if (diffTime < 0) return 'Time is up!';
+
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return `${diffDays} day`;
+  }
  
   const todoItem = (todo, index) => {
     return (
@@ -100,6 +123,11 @@ const TodoList = (props) => {
         <td>
           <Form.Group controlId={todo.deadline} className="FormGroup">
             <Form.Label>{convertDateFormat(todo.deadline)}</Form.Label>
+          </Form.Group>
+        </td>
+        <td>
+          <Form.Group controlId="remainDay" className="FormGroup">
+            <Form.Label>{`${remainDayToTask(todo.deadline)}`}</Form.Label>
           </Form.Group>
         </td>
         <td>
@@ -135,7 +163,8 @@ const TodoList = (props) => {
           <tr>
             <th>#</th>
             <th>Description</th>
-            <th>Deadline of Task</th>
+            <th>Deadline to Task</th>
+            <th>Remain Day to Task</th>
             <th>Label Color of Task</th>
             <th></th>
           </tr>
