@@ -8,6 +8,7 @@ import TodoList from '../components/TodoList/TodoList';
 import Filters from '../components/Filters/Filters';
 import * as actionCreators from '../redux/actions/index';
 import constants from '../resources/constants';
+import './TodoContainer.css';   
 
 const TodoContainer = (props) => {
 
@@ -29,9 +30,16 @@ const TodoContainer = (props) => {
   return(
     <div>
       <Header />
-      <AddTodo />
+      <div className="HeaderContainer">
+        <div className="AddTodo">
+          <AddTodo />
+        </div>
+        <div className="Filters">
+        <Filters />
+        </div>
+      </div>
       <TodoList />
-      <Filters />
+      
     </div>
   );
 };
