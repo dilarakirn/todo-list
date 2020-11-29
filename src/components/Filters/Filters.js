@@ -7,7 +7,7 @@ import './Filters.css';
 const Filters = (props) => {
   const filterItem = ({key, label}) => {
     return (
-      <div className="FilterContainer">
+      <div className="FilterContainer" key={key}>
         <button
             key={key}
             className="FilterButton"
