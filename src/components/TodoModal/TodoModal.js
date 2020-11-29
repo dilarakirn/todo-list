@@ -7,6 +7,7 @@ import './TodoModal.css';
 const TodoModal = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [todoDescription, setTodoDescription] = useState('');
+  const [todoDeadline, setTodoDeadline] = useState('');
   const [validated, setValidated] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,11 @@ const TodoModal = (props) => {
   const saveOnPress = () => {
     if (todoDescription) {
       setModalShow(false);
-      props.saveOnPress(todoDescription);
+      const todoItem = {
+        description: todoDescription,
+        deadline: todoDeadline,
+      };
+      props.saveOnPress(todoItem);
     }
   }
 
@@ -61,6 +66,15 @@ const TodoModal = (props) => {
               <Form.Control.Feedback type="invalid">
                 Please enter todo description.
               </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="deadline">
+              <Form.Label>Deadline of Task</Form.Label>
+              <Form.Control
+                value={todoDeadline}
+                type="date"
+                placeholder="Deadline of Task"
+                onChange={(e) => { setTodoDeadline(e.target.value); }}
+                />
             </Form.Group>
               <div className="ButtonContainer">
                 <div>

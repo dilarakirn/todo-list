@@ -8,6 +8,9 @@ let todoSchema = new Schema({
   description: {
     type: String
   },
+  deadline: {
+    type: String
+  },
   label: {
     type: String
   },

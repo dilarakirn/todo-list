@@ -43,13 +43,10 @@ const TodoList = (props) => {
         const todoItemIndex = props.filteredTodos.findIndex(todoItem => todoItem._id === selectedTodo);
         updatedTodo = {
           ...props.filteredTodos[todoItemIndex],
-          description: todo,
+          todo
         };
       }
-     
-      console.log('updateTodoApi - updatedTodo', updatedTodo);
       const response = await axios.put(`${constants.API_UPDATE_TODO}${updatedTodo._id}`, updatedTodo);
-      console.log('updatedTodo', response);
       if (response.data) {
         props.onUpdateTodo(updatedTodo)
       }
@@ -76,13 +73,27 @@ const TodoList = (props) => {
         saveOnPress={(todo) => { updateTodoApi(todo, 'updateTodo'); }} />
     );
   };
+
+  const convertDateFormat = (date) => {
+    if (!date) return;
+    const splittedDate = date.split("-");
+    return `${splittedDate[2]}.${splittedDate[1]}.${splittedDate[0]}`
+  }
  
   const todoItem = (todo, index) => {
     return (
       <tr key={todo._id}>
+         <td>
+          <p>{index}</p>
+        </td>
         <td>
           <Form.Group controlId={todo._id} className="FormGroup">
             <Form.Check type="checkbox" label={todo.description} checked={todo.completed} onChange={() => { todoItemCheckPress(todo._id); }}/>
+          </Form.Group>
+        </td>
+        <td>
+          <Form.Group controlId={todo.deadline} className="FormGroup">
+            <Form.Label>{convertDateFormat(todo.deadline)}</Form.Label>
           </Form.Group>
         </td>
         <td>
@@ -105,8 +116,16 @@ const TodoList = (props) => {
   };
 
   return(
-    <div className="table-wrapper">
+    <div>
       <Table hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>Deadline of Task</th>
+          <th></th>
+        </tr>
+      </thead>
         <tbody>
         {(props.filteredTodos && props.filteredTodos.length) ? props.filteredTodos.map((todo, index) => {
           return todoItem(todo, index)

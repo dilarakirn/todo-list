@@ -12,11 +12,12 @@ import './AddTodo.css';
 const AddTodo = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
-  const addTodo = async (desc) => {
+  const addTodo = async (todo) => {
     setModalShow(false);
     try {
       const todoItem = {
-        description: desc,
+        description: todo.description,
+        deadline: todo.deadline,
         completed: false,
       };
       const response = await axios.post(constants.API_POST_TODO, todoItem);
@@ -33,7 +34,7 @@ const AddTodo = (props) => {
       <Modal
         modalShow={modalShow}
         onClose={() => { setModalShow(false); }}
-        saveOnPress={(todoDesc) => { addTodo(todoDesc); }} />
+        saveOnPress={(todoItem) => { addTodo(todoItem); }} />
     );
   };
 
