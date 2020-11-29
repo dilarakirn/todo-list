@@ -33,7 +33,7 @@ const AddTodo = (props) => {
       <Modal
         modalShow={modalShow}
         onClose={() => { setModalShow(false); }}
-        saveOnPress={(todoDesc, labelColor) => { addTodo(todoDesc, labelColor); }} />
+        saveOnPress={(todoDesc) => { addTodo(todoDesc); }} />
     );
   };
 
