@@ -1,5 +1,15 @@
-.Button {
+.EditDeleteButton {
     margin: 5px;
     align-items: center;
     justify-content: center;
+}
+.TodoListTable {
+    max-width: 80%;
+}
+.TodoListContainer {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
 }
