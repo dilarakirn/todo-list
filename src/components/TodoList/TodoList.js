@@ -139,13 +139,13 @@ const TodoList = (props) => {
         </td>
         <td>
           <Button className="EditDeleteButton" size="sm" variant="success" onClick={() => { todoItemEditPress(todo._id); }}>
-          <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
+          <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
             <FiEdit2/>
           </IconContext.Provider>
            
           </Button>
           <Button className="EditDeleteButton" size="sm" variant="danger" onClick={() => { deleteTodoApi(todo._id)}}>
-            <IconContext.Provider value={{ color: 'white', size: '1.5vw', style: { verticalAlign: 'middle' } }}>
+            <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
              <FiTrash2/>
             </IconContext.Provider>
           </Button>

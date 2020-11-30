@@ -42,7 +42,7 @@ const AddTodo = (props) => {
   return(
     <div className="AddTodo">
       <Button size="sm" variant="primary" onClick={() => { setModalShow(true); }}>
-        <IconContext.Provider value={{ color: "white", size: '2vw', style: { verticalAlign: 'middle' } }}>
+        <IconContext.Provider value={{ color: "white", style: { verticalAlign: 'middle' } }}>
           <GrAdd />
         </IconContext.Provider>
       </Button>
