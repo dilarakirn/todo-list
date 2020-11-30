@@ -2,16 +2,16 @@ let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
 let bodyParser = require('body-parser');
-let dbConfig = require('./database/db');
 
 const path = require('path');
+require('dotenv').config();
 
 // Express Route
 const todoRoute = require('./routes/todo.js');
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
 }).then(() => {
   console.log('Database sucessfully connected!')
