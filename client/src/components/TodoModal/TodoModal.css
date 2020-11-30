@@ -1,10 +1,3 @@
-.ModalButton {
-    margin: 5px;
-    font-size: 50px;
-    /* padding: 10px; */
-    align-items: center;
-    justify-content: center;
-}
 .ColorLabel {
     width: 70px;
     height: 20px;
@@ -16,13 +9,6 @@
         width: 70px;
         height: 20px;
     }
-    .ModalButton {
-        margin: 5px;
-        width: 90px;
-        /* padding: 10px; */
-        align-items: center;
-        justify-content: center;
-    }
 }
 
 @media (max-width:960px) {
@@ -30,25 +16,11 @@
         width: 50px;
         height: 15px;
     }
-    .ModalButton {
-        margin: 5px;
-        width: 70px;
-        /* padding: 10px; */
-        align-items: center;
-        justify-content: center;
-    }
 }
 
 @media (max-width:479px) {
     .ColorLabel {
         width: 30px;
         height: 10px;
-    }
-    .ModalButton {
-        margin: 5px;
-        width: 50px;
-        /* padding: 10px; */
-        align-items: center;
-        justify-content: center;
     }
 }
