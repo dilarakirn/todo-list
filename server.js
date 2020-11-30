@@ -4,8 +4,10 @@ let cors = require('cors');
 let bodyParser = require('body-parser');
 let dbConfig = require('./database/db');
 
+const path = require('path');
+
 // Express Route
-const todoRoute = require('../backend/routes/todo.js');
+const todoRoute = require('./routes/todo.js');
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
@@ -27,9 +29,14 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use('/todos', todoRoute);
 
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // PORT
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8000;
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port);
 });
