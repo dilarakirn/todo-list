@@ -157,8 +157,8 @@ const TodoList = (props) => {
   };
 
   return(
-    <div className="TodoListContainer">
-      <Table hover className="TodoListTable">
+    <div>
+      <Table hover>
         <thead>
           <tr>
             <th>#</th>
