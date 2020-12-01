@@ -83,6 +83,7 @@ const TodoList = (props) => {
   const convertDateFormat = (date) => {
     // ex param: 2021-01-15 return: 15.01.2021
     if (!date) return;
+    if (!(date.includes('-'))) return date;
     const splittedDate = date.split("-");
     return `${splittedDate[2]}.${splittedDate[1]}.${splittedDate[0]}`
   }
