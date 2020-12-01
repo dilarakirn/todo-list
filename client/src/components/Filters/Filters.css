@@ -11,6 +11,11 @@
     border:none;
     outline:none;
 }
+.FilterButton:hover {
+    border:none;
+    outline:none;
+    color: #5752eb;
+}
 .FilterDiv {
     display: flex;
     flex-direction: row;
