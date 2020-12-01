@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux'; // connect - high order component'i return eden bir func.
+import { connect } from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -81,12 +81,14 @@ const TodoList = (props) => {
   };
 
   const convertDateFormat = (date) => {
+    // ex param: 2021-01-15 return: 15.01.2021
     if (!date) return;
     const splittedDate = date.split("-");
     return `${splittedDate[2]}.${splittedDate[1]}.${splittedDate[0]}`
   }
 
   const remainDayToTask = (taskDeadline) => {
+    // find remain day to task by calculating difference between task deadline and today date
     let convertedDeadline = '';
     if (taskDeadline ) {
       const splittedDate = taskDeadline.split("-");
@@ -106,14 +108,16 @@ const TodoList = (props) => {
     if (diffTime < 0) return 'Time is up!';
 
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return `${diffDays} day`;
+    if (diffDays) {
+      return `${diffDays} day`;
+    } else return '';
   }
  
   const todoItem = (todo, index) => {
     return (
       <tr key={todo._id}>
          <td>
-          <p>{index}</p>
+          {index}
         </td>
         <td>
           <Form.Group controlId={todo._id} className="FormGroup">
@@ -157,26 +161,31 @@ const TodoList = (props) => {
   };
 
   return(
-    <div>
-      <Table hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Description</th>
-            <th>Deadline to Task</th>
-            <th>Remain Day to Task</th>
-            <th>Label Color of Task</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        {(props.filteredTodos && props.filteredTodos.length) ? props.filteredTodos.map((todo, index) => {
-          return todoItem(todo, index)
-        }) : null}
-        </tbody>
-      </Table>
+    <Table hover responsive>
+    {(props.filteredTodos && props.filteredTodos.length) ? <thead>
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>Deadline of Task</th>
+          <th>Remain Day to Task</th>
+          <th>Label Color of Task</th>
+          <th />
+        </tr>
+      </thead> : null }
+      <tbody>
+      {(props.filteredTodos && props.filteredTodos.length) ? props.filteredTodos.map((todo, index) => {
+        return todoItem(todo, index)
+      }) :
+        <tr>
+          <td>
+            <div className="NoTodo">
+              There is no task on the list
+            </div>
+          </td>
+        </tr>}
+      </tbody>
       {renderModal()}
-    </div>
+    </Table>
   );
 }
 
