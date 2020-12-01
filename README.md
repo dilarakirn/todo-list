@@ -2,7 +2,8 @@
 Basic todo list app for adding, listing, deleting, updating todos. You can also add deadline of task and set the label color to task. The remain day to task is shown on the table.
 
 ## run the project locally
-After clone the project, in the project directory you should run "npm run dev" command. You can also check project uri: https://todoexapp.herokuapp.com/
+After clone the project, in the project directory firstly you should run "npm install", then "cd client && npm install" command. After that in the project directory, run "npm run dev" command.
+You can also check project uri: https://todoexapp.herokuapp.com/
 
 ## project structure
 ### backend
