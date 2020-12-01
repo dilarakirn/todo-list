@@ -11,7 +11,7 @@ const TodoModal = (props) => {
   const [todoDescription, setTodoDescription] = useState('');
   const [todoDeadline, setTodoDeadline] = useState('');
   const [todoLabelColor, setTodoLabelColor] = useState('');
-  const [validated, setValidated] = useState(false);
+  const [warningVisible, setWarningVisible] = useState(false);
 
   useEffect(() => {
     setModalShow(props.modalShow);
@@ -22,8 +22,8 @@ const TodoModal = (props) => {
 
   const clearModal = () => {
     setModalShow(false);
-    setTodoDescription(null);
-    setTodoDeadline(null);
+    setTodoDescription('');
+    setTodoDeadline('');
     setTodoLabelColor(null);
   }
 
@@ -34,6 +34,7 @@ const TodoModal = (props) => {
 
   const saveOnPress = () => {
     if (todoDescription) {
+      setWarningVisible(false);
       clearModal();
       const todoItem = {
         ...props.todo,
@@ -42,18 +43,11 @@ const TodoModal = (props) => {
         labelColor: todoLabelColor,
       };
       props.saveOnPress(todoItem);
+    } else {
+      setWarningVisible(true);
     }
   }
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    setValidated(true);
-  };
-  
   return(
     <Modal
         show={modalShow}
@@ -68,7 +62,7 @@ const TodoModal = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form>
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
@@ -76,16 +70,19 @@ const TodoModal = (props) => {
                 type="text"
                 placeholder="Description"
                 value={todoDescription}
-                onChange={(e) => { setTodoDescription(e.target.value); }}
+                onChange={(e) => {
+                  setWarningVisible(false);
+                  setTodoDescription(e.target.value); 
+                }}
               />
-              <Form.Control.Feedback type="invalid">
-                Please enter todo description.
-              </Form.Control.Feedback>
+              {warningVisible ? 
+                <Form.Text style={{color: 'red'}}>Please enter todo description!</Form.Text>
+                : null}
             </Form.Group>
             <Form.Group controlId="deadline">
               <Form.Label>Deadline of Task</Form.Label>
               <Form.Control
-                value={todoDeadline}
+                value={todoDeadline || ''}
                 type="date"
                 placeholder="Deadline of Task"
                 onChange={(e) => { setTodoDeadline(e.target.value); }}
@@ -106,7 +103,7 @@ const TodoModal = (props) => {
                 })}
               </Col>
             </Form.Group>
-              <Button size="sm" className="ModalButton" variant="success" onClick={saveOnPress}>Save</Button> 
+            <Button size="sm" variant="success" onClick={saveOnPress}>Save</Button> 
           </Form>
         </Modal.Body>
         <Modal.Footer>
