@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux'; // connect - high order component'i return eden bir func.
+import { connect } from 'react-redux';
 import Modal from '../TodoModal/TodoModal';
 import Button from 'react-bootstrap/Button';
 import { IconContext } from 'react-icons';
